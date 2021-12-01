@@ -5,7 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DocenteController;
+use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\PrestamoController;
+use App\Http\Controllers\ReporteController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +23,7 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -34,7 +38,3 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('prestamo', PrestamoController::class);
     Route::resource('reporte', ReporteController::class);
 });
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

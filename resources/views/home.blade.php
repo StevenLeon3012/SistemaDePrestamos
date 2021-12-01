@@ -2,19 +2,45 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
+    <div id="content" class="container-fluid py-4">
+        <div class="row m-4">
+            <div class="col-12">
+                <h5>SISTEMA DE PRESTAMO DE EQUIPOS DE COMPUTO</h5>
+            </div>
+            <div class="col-sm-6 my-4">
+                <div class="card border-0">
+                    <div class="card-body d-block">
+                        <h5 class="card-title my-4">Gestionar Reportes</h5>
+                        <img src="/img/icons/report.svg"  style="height:100px" alt="...">
+                        <a href="/reportes.html"class="btn btn-dark   btn-lg rounded-pill "style="width:100px">Visitar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 my-4">
+                <div class="card border-0" >
+                    <div class="card-body d-block">
+                        <h5 class="card-title my-4">Gestionar Usuarios</h5>
+                        <img src="/img/icons/users.svg"  style="height:100px" alt="...">
+                        <a href="{{ route('users.index') }}"class="btn btn-dark   btn-lg rounded-pill" style="width:100px">Visitar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 my-4">
+                <div class="card border-0">
+                    <div class="card-body d-block">
+                        <h5 class="card-title my-4">Gestionar Docentes</h5>
+                        <img src="/img/icons/classroom.svg"  style="height:100px" alt="...">
+                        <a href="/docentes.html"class="btn btn-dark   btn-lg rounded-pill" style="width:100px">Visitar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 my-4">
+                <div class="card border-0">
+                    <div class="card-body d-block">
+                        <h5 class="card-title my-4">Gestionar Equipos</h5>
+                        <img src="/img/icons/classroom.svg"  style="height:100px" alt="...">
+                        <a href="/equipos.html"class="btn btn-dark   btn-lg rounded-pill"style="width:100px">Visitar</a>
+                    </div>
                 </div>
             </div>
         </div>

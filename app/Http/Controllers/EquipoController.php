@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Equipo;
 use Illuminate\Http\Request;
+use DB;
 
-class DocenteController extends Controller
+class EquipoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,8 +27,8 @@ class DocenteController extends Controller
      */
     public function index()
     {
-        $equipos = Equipo::orderBy('created_at', 'DESC')->get();
-        return view('equipos.index',compact('equipos'));
+        $equipos = DB::table('equipo')->orderBy('created_at', 'DESC')->get();
+        return view('equipo.index',compact('equipos'));
     }
 
     /**

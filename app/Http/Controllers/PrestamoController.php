@@ -7,6 +7,7 @@ use App\Models\Docente;
 use App\Models\User;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
+use DB;
 
 class PrestamoController extends Controller
 {
@@ -29,8 +30,8 @@ class PrestamoController extends Controller
      */
     public function index()
     {
-        $docentes = Docente::orderBy('created_at', 'DESC')->get();
-        return view('prestamos.index',compact('prestamos'));
+        $prestamos = DB::table('equipo')->orderBy('created_at', 'DESC')->get();
+        return view('prestamo.index',compact('prestamos'));
     }
 
     /**

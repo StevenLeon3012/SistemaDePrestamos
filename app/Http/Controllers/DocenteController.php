@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Docente;
 use Illuminate\Http\Request;
+use DB;
 
 class DocenteController extends Controller
 {
@@ -26,8 +27,8 @@ class DocenteController extends Controller
      */
     public function index()
     {
-        $docentes = Docente::orderBy('created_at', 'DESC')->get();
-        return view('docentes.index',compact('docentes'));
+        $docentes = DB::table('docente')->orderBy('created_at', 'DESC')->get();
+        return view('docente.index',compact('docentes'));
     }
 
     /**
