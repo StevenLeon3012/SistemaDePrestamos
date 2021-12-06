@@ -30,9 +30,13 @@ class ReporteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $prestamos = DB::table('prestamos')->orderBy('created_at', 'DESC')->get();
+        request()->validate([
+            'reporte' => 'required'
+        ]);
+        return $request['reporte'];
+        $prestamos = DB::table('prestamos')->orderBy('created_at', 'DESC')->where('created_at', $request['reporte']);
         $usuarios = User::all();
         $equipos = Equipo::all();
         $docentes = Docente::all();
@@ -58,14 +62,16 @@ class ReporteController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'prestamo' => 'required',
-            'detalle' => 'required',
+            'reporte' => 'required'
         ]);
-
-        Docente::create($request->all());
-
-        return redirect()->route('reportes.index')
-                        ->with('success','Reporte generado correctamente.');
+        $fecha1 = $request->reporte;
+        $fecha2 = date("Y-m-d",strtotime($request->reporte. "+ 1 days"));
+        $prestamos = DB::table('prestamos')->where('created_at','>=', $fecha1)->where('created_at','<', $fecha2)->orderBy('created_at', 'DESC')->get();
+        $usuarios = User::all();
+        $equipos = Equipo::all();
+        $docentes = Docente::all();
+        $pdf = PDF::loadView('reporte.index',compact('prestamos', 'equipos', 'docentes', 'usuarios'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->download('Reporte.pdf');
     }
 
     /**

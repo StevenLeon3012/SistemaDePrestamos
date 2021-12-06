@@ -1,7 +1,6 @@
 #wrapper {
     overflow-x: hidden;
-  }
-
+}
 #sidebar-wrapper {
 min-height: 90vh;
 margin-left: -15rem;
@@ -38,4 +37,49 @@ margin-left: 0;
 body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     margin-left: -15rem;
 }
+}
+.popup .overlay{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.7);
+    z-index: 1;
+    display: none;
+}
+.popup .contenido{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: #fff;
+    width: 40vh;
+    height: 220px;
+    z-index: 2;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.popup .cerrarBtn{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    background: #4e4e50;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+}
+.popup.active .overlay{
+    display: block;
+}
+
+.popup.active .contenido{
+    transition: all 100ms ease-in-out;
+    transform: translate(-50%, -50%) scale(1);
 }

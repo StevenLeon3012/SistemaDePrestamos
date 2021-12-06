@@ -10,8 +10,37 @@
     else
       return false;
     }
+    function mostrarPopUp(){
+        document.getElementById("popup-1").classList.toggle("active");
+    }
 
   </script>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <strong>Ups!</strong> Hay un inconveniente en los input, vuelva a intentar.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+<div class="popup" id="popup-1">
+    <div class="overlay"></div>
+    <div class="contenido">
+        <div class="cerrarBtn" onclick="mostrarPopUp()">&times;</div>
+        <form action="{{ route('reporte.index') }}" method="POST">
+            @csrf
+            <label>
+                <strong>Generar reporte del día:</strong>
+            </label>
+            <input class="mt-3" type="date" name="reporte">
+            <div>
+                <button type="submit" class="btn" style="background-color: #94c83d; margin-top:5vh;">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
 <div id="content" class="container-fluid py-4">
     <div class="row m-4">
         <div class="col-12">
@@ -20,9 +49,9 @@
                     <h5>PRÉSTAMO</h5>
                 </div>
                 <div class="offset-5 col-2">
-                    <a href="{{ route('reporte.index') }}" type="button" class="btn" style="background-color: #94c83d">
+                    <button onclick="mostrarPopUp()" type="button" class="btn" style="background-color: #94c83d">
                          Generar Reporte
-                    </a>
+                    </button>
                 </div>
                 <div class="col-2">
                     <a href="{{ route('prestamo.create') }}" type="button" class="btn" style="background-color: #94c83d">
