@@ -124,9 +124,5 @@ class EquipoController extends Controller
         return redirect()->route('equipo.index')
                         ->with('success','Equipo eliminado correctamente');
     }
-    public function console_log($data){
-        echo '<script>';
-        echo 'console.log('. json_encode( $data ) .')';
-        echo '</script>';
-      }
+
 }

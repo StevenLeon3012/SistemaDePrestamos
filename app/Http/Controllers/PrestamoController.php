@@ -120,6 +120,13 @@ class PrestamoController extends Controller
         ]);
 
         $prestamo->update($request->all());
+        $equipo = Equipo::find($prestamo->equipoID);
+        if($request->estado){
+            $equipo['estado'] = 0;
+        }else{
+            $equipo['estado'] = 1;
+        }
+        \DB::table('equipos')->where('id', $equipo->id)->update(['estado' => $equipo['estado']]);
 
         return redirect()->route('prestamo.index')
                         ->with('success','Prestamo actualizado correctamente');

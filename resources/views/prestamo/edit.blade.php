@@ -1,7 +1,19 @@
 @extends('layouts.app')
 @section('content')
+<script>
+
+    function confirmar()
+    {
+    var x = confirm("Estas seguro que quieres editar este prestamo" );
+    if (x)
+      return true;
+    else
+      return false;
+    }
+
+  </script>
 <div class="pull-right">
-    <a class="btn btn-primary" style="margin-bottom: 10px;" href="{{ route('prestamo.index') }}">Atrás</a>
+    <a class="btn btn-primary" style="margin-bottom: 10px; margin-left: 30vh;" href="{{ route('prestamo.index') }}">Atrás</a>
 </div>
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -13,11 +25,11 @@
         </ul>
     </div>
 @endif
-<form action="{{ route('prestamo.update', $prestamo->id) }}" method="POST">
+<form action="{{ route('prestamo.update', $prestamo->id) }}" method="POST" style="margin-left: 30vh">
     @csrf
     @method('PUT')
     <div class="container">
-      <div class="row">
+      <div class="row" style="width: 100vh">
         <div class="col-6">
             <div class="mb-3">
                 <input type="hidden" name="usuarioID" class="form-control" value="{{ $userPrestamo->id }}">
@@ -56,18 +68,36 @@
             <label style="margin-bottom: 3%;" class="form-check-label">
                 Estado
             </label>
+            @if ($prestamo->estado == 1)
             <div class="mb-3">
                 <input class="form-check-input" type="radio" name="estado" value="1" checked>
                 <label class="form-check-label">
                     En prestamo
                 </label>
             </div>
+            @else
+            <div class="mb-3">
+                <input class="form-check-input" type="radio" name="estado" value="1">
+                <label class="form-check-label">
+                    En prestamo
+                </label>
+            </div>
+            @endif
+            @if ($prestamo->estado == 0)
+            <div class="mb-3">
+                <input class="form-check-input" type="radio" name="estado" value="0" checked>
+                <label class="form-check-label">
+                    Finalizado
+                </label>
+            </div>
+            @else
             <div class="mb-3">
                 <input class="form-check-input" type="radio" name="estado" value="0">
                 <label class="form-check-label">
                     Finalizado
                 </label>
             </div>
+            @endif
         </div>
         <div class="col-6">
             <div class="mb-3">
@@ -90,9 +120,9 @@
                             <tr>
                                 <td>
                                     @if ($equipo->id == $equipoPrestamo->id)
-                                    <input class="form-check-input" value="{{ $equipo->id }}" type="radio" name="equipoID" checked>
+                                        <input class="form-check-input" value="{{ $equipo->id }}" type="radio" name="equipoID" checked>
                                     @else
-                                    <input class="form-check-input" value="{{ $equipo->id }}" type="radio" name="equipoID">
+                                        <input class="form-check-input" value="{{ $equipo->id }}" type="radio" name="equipoID">
                                     @endif
                                 </td>
                                 <td>
@@ -108,7 +138,7 @@
                 <textarea class="form-control"  name="detalle" id="" cols="10" rows="4">{{ $prestamo->detalle }}</textarea>
             </div>
             <div class="d-flex flex-row-reverse">
-                <button type="submit" class="btn" style="background-color: #94c83d;">Guardar</button>
+                <button type="submit" class="btn" onclick="confirmar();" style="background-color: #94c83d;">Guardar</button>
             </div>
         </div>
       </div>

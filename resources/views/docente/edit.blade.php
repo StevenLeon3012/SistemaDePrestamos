@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="pull-right">
-        <a class="btn btn-primary" style="margin-bottom: 10px;" href="{{ route('docente.index') }}">Atrás</a>
+        <a class="btn btn-primary" style="margin-bottom: 10px; margin-left: 30vh;" href="{{ route('docente.index') }}">Atrás</a>
     </div>
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -13,11 +13,11 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('docente.update', $docente->id) }}" method="POST">
+    <form action="{{ route('docente.update', $docente->id) }}" method="POST" style="margin-left: 30vh">
         @csrf
         @method('PUT')
         <div class="container">
-            <div class="row">
+            <div class="row" style="width: 100vh">
                 <div class="mb-3">
                     <label class="form-label">Nombre Completo</label>
                     <input type="text" name="name" class="form-control" value="{{ $docente->name }}">

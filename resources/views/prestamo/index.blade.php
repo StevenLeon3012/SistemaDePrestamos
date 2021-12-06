@@ -1,5 +1,17 @@
 @extends('layouts.app')
 @section('content')
+<script>
+
+    function confirmarDelete()
+    {
+    var x = confirm("Estas seguro que quieres eliminar este prestamo" );
+    if (x)
+      return true;
+    else
+      return false;
+    }
+
+  </script>
 <div id="content" class="container-fluid py-4">
     <div class="row m-4">
         <div class="col-12">
@@ -26,6 +38,7 @@
                                 <th scope="col">Docente</th>
                                 <th scope="col">Equipo</th>
                                 <th scope="col">Fecha</th>
+                                <th scope="col">Estado</th>
                                 <th scope="col">Opciones</th>
                             </tr>
                         </thead>
@@ -49,12 +62,17 @@
                                         @endif
                                     @endforeach
                                     <td>{{ $prestamo->created_at }}</td>
+                                    @if ($prestamo->estado == 1)
+                                        <td>En prestamo</td>
+                                    @else
+                                        <td>Finalizado</td>
+                                    @endif
                                     <td>
                                         <div class="d-grid gap-2 d-md-block">
                                             <a href="{{ route('prestamo.edit', $prestamo->id) }}" type="button" class="btn" style="background-color: #94c83d">
                                                 EDITAR
                                             </a>
-                                            {!! Form::open(['method' => 'DELETE','route' => ['prestamo.destroy', $prestamo->id],'style'=>'display:inline']) !!}
+                                            {!! Form::open(['method' => 'DELETE','route' => ['prestamo.destroy', $prestamo->id],'onsubmit' => 'confirmarDelete()','style'=>'display:inline']) !!}
                                             {!! Form::submit('Eliminar', ['class' => 'btn btn-danger']) !!}
                                             {!! Form::close() !!}
                                         </div>

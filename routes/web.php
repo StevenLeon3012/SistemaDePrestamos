@@ -9,7 +9,6 @@ use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\PrestamoController;
 use App\Http\Controllers\ReporteController;
-use App\Models\Docente;
 
 /*
 |--------------------------------------------------------------------------

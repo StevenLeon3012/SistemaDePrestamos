@@ -24,7 +24,7 @@
 <body>
     <div id="wrapper" class="menuDisplayed">
         <div id="app">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark top-fixed">
+            <nav style="height:10vh" class="navbar navbar-expand-lg navbar-dark bg-dark top-fixed">
                 <div class="container-fluid">
                     <img src="/img/logo.png"  height="60" alt="">
                     <div class="d-flex flex-row-reverse collapse navbar-collapse" id="navbarSupportedContent">
@@ -55,9 +55,11 @@
                         <div class="list-group list-group-flush">
                             <a class="list-group-item list-group-item-action p-3" style="background-color: #94c83d; color: white;" href="{{ route('home') }}">Inicio</a>
                             <a class="list-group-item list-group-item-action bg-dark p-3" style="color: white;" href="{{ route('prestamo.index') }}">Préstamos</a>
+                            @if (Auth::user()->hasRole('Admin'))
                             <a class="list-group-item list-group-item-action bg-dark p-3" style="color: white;" href="{{ route('users.index') }}">Usuarios</a>
                             <a class="list-group-item list-group-item-action bg-dark p-3" style="color: white;" href="{{ route('docente.index') }}">Docentes</a>
                             <a class="list-group-item list-group-item-action bg-dark p-3" style="color: white;" href="{{ route('equipo.index') }}">Equipos</a>
+                            @endif
                         </div>
                     </div>
             @endguest

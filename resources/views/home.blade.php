@@ -7,6 +7,17 @@
             <div class="col-12">
                 <h5>SISTEMA DE PRESTAMO DE EQUIPOS DE COMPUTO</h5>
             </div>
+            @if (Auth::user()->hasRole('Admin'))
+            <div class="col-sm-4 my-4">
+                <div class="card border-0">
+                    <div class="card-body d-block">
+                        <h5 class="card-title my-4">Gestionar Préstamos</h5>
+                        <img src="/img/icons/report.svg"  style="height:100px" alt="...">
+                        <a href="{{ route('prestamo.index') }}"class="btn btn-dark   btn-lg rounded-pill "style="width:100px">Visitar</a>
+                    </div>
+                </div>
+            </div>
+            @else
             <div class="col-sm-6 my-4">
                 <div class="card border-0">
                     <div class="card-body d-block">
@@ -16,7 +27,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 my-4">
+            @endif
+            @if (Auth::user()->hasRole('Admin'));
+            <div class="col-sm-4 my-4">
                 <div class="card border-0" >
                     <div class="card-body d-block">
                         <h5 class="card-title my-4">Gestionar Usuarios</h5>
@@ -25,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 my-4">
+            <div class="col-sm-4 my-4">
                 <div class="card border-0">
                     <div class="card-body d-block">
                         <h5 class="card-title my-4">Gestionar Docentes</h5>
@@ -34,7 +47,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 my-4">
+            <div class="col-sm-4 my-4">
                 <div class="card border-0">
                     <div class="card-body d-block">
                         <h5 class="card-title my-4">Gestionar Equipos</h5>
@@ -43,6 +56,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </div>

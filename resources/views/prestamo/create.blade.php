@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="pull-right">
-        <a class="btn btn-primary" style="margin-bottom: 10px;" href="{{ route('prestamo.index') }}">Atrás</a>
+        <a class="btn btn-primary" style="margin-bottom: 10px; margin-left: 30vh;" href="{{ route('prestamo.index') }}">Atrás</a>
     </div>
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -13,10 +13,10 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('prestamo.store') }}" method="POST">
+    <form action="{{ route('prestamo.store') }}" method="POST" style="margin-left: 30vh">
         @csrf
         <div class="container">
-          <div class="row">
+          <div class="row" style="width: 100vh">
             <div class="col-6">
                 <div class="mb-3">
                     <input type="hidden" name="usuarioID" class="form-control" value="{{ Auth::user()->id }}">
@@ -51,21 +51,7 @@
                         {!! $docentes->links() !!}
                     </div>
                 </div>
-                <label style="margin-bottom: 3%;" class="form-check-label">
-                    Estado
-                </label>
-                <div class="mb-3">
-                    <input class="form-check-input" type="radio" name="estado" value="1" checked>
-                    <label class="form-check-label">
-                        En prestamo
-                    </label>
-                </div>
-                <div class="mb-3">
-                    <input class="form-check-input" type="radio" name="estado" value="0">
-                    <label class="form-check-label">
-                        Finalizado
-                    </label>
-                </div>
+                <input type="hidden" name="estado" value="1">
             </div>
             <div class="col-6">
                 <div class="mb-3">
@@ -85,14 +71,16 @@
                         </thead>
                         <tbody>
                             @foreach ($equipos as $equipo)
-                                <tr>
-                                    <td>
-                                        <input class="form-check-input" value="{{ $equipo->id }}" type="radio" name="equipoID">
-                                    </td>
-                                    <td>
-                                        {{ $equipo->nombre }}
-                                    </td>
-                                </tr>
+                                @if ($equipo->estado == 1)
+                                    <tr>
+                                        <td>
+                                            <input class="form-check-input" value="{{ $equipo->id }}" type="radio" name="equipoID">
+                                        </td>
+                                        <td>
+                                            {{ $equipo->nombre }}
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>
