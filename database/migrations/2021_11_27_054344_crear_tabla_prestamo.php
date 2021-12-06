@@ -13,7 +13,7 @@ class CrearTablaPrestamo extends Migration
      */
     public function up()
     {
-        Schema::create('prestamo', function (Blueprint $table) {
+        Schema::create('prestamos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('usuarioID');
             $table->unsignedBigInteger('equipoID');
@@ -22,8 +22,8 @@ class CrearTablaPrestamo extends Migration
             $table->longText('detalle');
             $table->boolean('estado');
             $table->foreign('usuarioID')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('equipoID')->references('id')->on('equipo')->onDelete('cascade');
-            $table->foreign('docenteID')->references('id')->on('docente')->onDelete('cascade');
+            $table->foreign('equipoID')->references('id')->on('equipos')->onDelete('cascade');
+            $table->foreign('docenteID')->references('id')->on('docentes')->onDelete('cascade');
         });
     }
 
@@ -34,6 +34,6 @@ class CrearTablaPrestamo extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prestamo');
+        Schema::dropIfExists('prestamos');
     }
 }

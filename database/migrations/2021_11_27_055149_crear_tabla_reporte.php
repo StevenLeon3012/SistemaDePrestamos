@@ -13,12 +13,12 @@ class CrearTablaReporte extends Migration
      */
     public function up()
     {
-        Schema::create('reporte', function (Blueprint $table) {
+        Schema::create('reportes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('prestamoID');
             $table->longText('detalle');
             $table->timestamps();
-            $table->foreign('prestamoID')->references('id')->on('prestamo')->onDelete('cascade');
+            $table->foreign('prestamoID')->references('id')->on('prestamos')->onDelete('cascade');
         });
     }
 

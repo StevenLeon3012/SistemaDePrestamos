@@ -14,7 +14,7 @@ class Docente extends Model {
      * @var array
      */
     protected $fillable = [
-        'nombre' ,'email', 'telefono'
+        'name' ,'email', 'telefono'
     ];
 
     //Relacion uno a muchos

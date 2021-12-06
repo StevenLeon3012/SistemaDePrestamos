@@ -1,65 +1,55 @@
 @extends('layouts.app')
 @section('content')
-<!-- Modal -->
-<div class="modal fade" id="editar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editar">EDITAR USUARIO</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Nombre Completo</label>
-              <input type="text" class="form-control" id="exampleInputEmail1"
-              >
-
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Numero Empleado</label>
-              <input type="text" class="form-control" id="exampleInputEmail1"
-              >
-
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Rol</label>
-              <select class="form-control" id="exampleFormControlSelect1">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Correo</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Telefono</label>
-              <input type="text" class="form-control" id="exampleInputEmail1"
-              >
-
-            </div>
-
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Fecha Registro</label>
-              <input type="date" class="form-control" id="exampleInputEmail1"
-              >
-
-            </div>
-
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Guardar</button>
-        </div>
-      </div>
+<div class="pull-right">
+    <a class="btn btn-primary" style="margin-bottom: 10px;" href="{{ route('users.index') }}">Atrás</a>
+</div>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <strong>Ups!</strong> Hay un inconveniente en los input, vuelva a intentar.<br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
     </div>
-  </div>
-    </div>
+@endif
+    <form action="{{ route('users.update', $user->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <div class="mb-3">
+            <label class="form-label">Nombre Completo</label>
+            <input type="text" name="name" class="form-control" value="{{ $user->name }}">
+        </div>
+        @foreach ($roles as $rol)
+            <div class="mb-3">
+                <label class="form-check-label">
+                    @if ($rol->name == "Admin")
+                        Usuario Administrador
+                    @else
+                        {{ $rol->name }}
+                    @endif
+                </label>
+                @if ($rol->name == $userRole)
+                    <input class="form-check-input" value="{{ $rol->id }}" type="radio" name="roles" checked>
+                @else
+                    <input class="form-check-input" value="{{ $rol->id }}" type="radio" name="roles">
+                @endif
+            </div>
+        @endforeach
+        <div class="mb-3">
+            <label class="form-label">Correo</label>
+            <input type="email" name="email" class="form-control" value="{{ $user->email }}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Contraseña</label>
+            <input type="password" name="password" class="form-control" placeholder="Contraseña del usuario">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Confirmar Contraseña</label>
+            <input type="password" name="confirmPassword" class="form-control" placeholder="Contraseña del usuario">
+        </div>
+        <div class="d-flex flex-row-reverse">
+            <button type="submit" class="btn" style="background-color: #94c83d;">Guardar</button>
+        </div>
+    </form>
 @endsection

@@ -13,7 +13,7 @@ class CrearTablaEquipo extends Migration
      */
     public function up()
     {
-        Schema::create('equipo', function (Blueprint $table) {
+        Schema::create('equipos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->string('tipoDispositivo');
@@ -33,6 +33,6 @@ class CrearTablaEquipo extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('equipo');
+        Schema::dropIfExists('equipos');
     }
 }

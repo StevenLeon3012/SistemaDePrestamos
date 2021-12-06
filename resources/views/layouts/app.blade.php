@@ -27,8 +27,8 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark top-fixed">
                 <div class="container-fluid">
                     <img src="/img/logo.png"  height="60" alt="">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="right navbar-nav ml-auto" style="display:flex;justify-content: flex-end;">
+                    <div class="d-flex flex-row-reverse collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="right navbar-nav ml-auto">
                             <!-- Authentication Links -->
                             @guest
                             @else
@@ -49,21 +49,23 @@
             </nav>
             @guest
             @else
-                <ul class="navbar-nav mr-auto bg-dark">
-                    <div id="sidebar" class="bg-dark">
-                        <ul class="list-unstyled">
-                            <li><a href="{{ route('home') }}" class="li-active">Inicio</a></li>
-                            <li><a href="{{ route('prestamo.index') }}">Préstamos</a></li>
-                            <li><a href="{{ route('users.index') }}">Usuarios</a></li>
-                            <li><a href="{{ route('docente.index') }}">Docentes</a></li>
-                            <li><a href="{{ route('equipo.index') }}" >Equipos</a></li>
-                        </ul>
+                <div class="d-flex" id="wrapper">
+                    <!-- Sidebar-->
+                    <div class="border-end bg-dark" id="sidebar-wrapper">
+                        <div class="list-group list-group-flush">
+                            <a class="list-group-item list-group-item-action p-3" style="background-color: #94c83d; color: white;" href="{{ route('home') }}">Inicio</a>
+                            <a class="list-group-item list-group-item-action bg-dark p-3" style="color: white;" href="{{ route('prestamo.index') }}">Préstamos</a>
+                            <a class="list-group-item list-group-item-action bg-dark p-3" style="color: white;" href="{{ route('users.index') }}">Usuarios</a>
+                            <a class="list-group-item list-group-item-action bg-dark p-3" style="color: white;" href="{{ route('docente.index') }}">Docentes</a>
+                            <a class="list-group-item list-group-item-action bg-dark p-3" style="color: white;" href="{{ route('equipo.index') }}">Equipos</a>
+                        </div>
                     </div>
-                </ul>
             @endguest
             <main class="py-4">
-                <div class="container">
-                @yield('content')
+                <div id="page-content-wrapper">
+                    <div class="container-fluid">
+                        @yield('content')
+                    </div>
                 </div>
             </main>
         </div>

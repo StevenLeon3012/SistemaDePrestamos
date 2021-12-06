@@ -9,7 +9,7 @@ use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\PrestamoController;
 use App\Http\Controllers\ReporteController;
-
+use App\Models\Docente;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +26,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -38,3 +39,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('prestamo', PrestamoController::class);
     Route::resource('reporte', ReporteController::class);
 });
+
+Route::get('/downloadPDF', [PrestamoController::class, 'downloadPDF']);

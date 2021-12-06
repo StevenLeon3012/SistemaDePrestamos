@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class PrestamoController extends Controller
 {
@@ -30,8 +31,11 @@ class PrestamoController extends Controller
      */
     public function index()
     {
-        $prestamos = DB::table('equipo')->orderBy('created_at', 'DESC')->get();
-        return view('prestamo.index',compact('prestamos'));
+        $prestamos = DB::table('prestamos')->orderBy('created_at', 'DESC')->get();
+        $usuarios = User::all();
+        $equipos = Equipo::all();
+        $docentes = Docente::all();
+        return view('prestamo.index',compact('prestamos', 'equipos', 'docentes', 'usuarios'));
     }
 
     /**
@@ -41,9 +45,9 @@ class PrestamoController extends Controller
      */
     public function create()
     {
-        $docentes = Docente::all();
-        $equipos = Equipo::all();
-        return view('prestamos.create', compact('docentes', 'equipos'));
+        $docentes = DB::table('docentes')->paginate(5);
+        $equipos =  DB::table('equipos')->paginate(5);
+        return view('prestamo.create', compact('docentes', 'equipos'));
     }
 
     /**
@@ -55,16 +59,16 @@ class PrestamoController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'usuario' => 'required',
-            'equipo' => 'required',
-            'docente' => 'required',
+            'usuarioID' => 'required',
+            'equipoID' => 'required',
+            'docenteID' => 'required',
             'detalle' => 'required',
             'estado' => 'required'
         ]);
 
-        Docente::create($request->all());
+        Prestamo::create($request->all());
 
-        return redirect()->route('prestamos.index')
+        return redirect()->route('prestamo.index')
                         ->with('success','Prestamo procesado correctamente.');
     }
 
@@ -79,7 +83,7 @@ class PrestamoController extends Controller
         $user = Prestamo::find($prestamo->usuarioID);
         $docente = Docente::find($prestamo->docenteID);
         $equipo = Equipo::find($prestamo->equipoID);
-        return view('prestamos.show',compact('prestamo', 'user', 'docente', 'equipo'));
+        return view('prestamo.show',compact('prestamo', 'user', 'docente', 'equipo'));
     }
 
     /**
@@ -90,10 +94,12 @@ class PrestamoController extends Controller
      */
     public function edit(Prestamo $prestamo)
     {
-        $user = Prestamo::find($prestamo->usuarioID);
-        $docente = Docente::find($prestamo->docenteID);
-        $equipo = Equipo::find($prestamo->equipoID);
-        return view('prestamos.edit',compact('prestamo', 'user', 'docente', 'equipo'));
+        $docentes = DB::table('docentes')->paginate(5);
+        $equipos =  DB::table('equipos')->paginate(5);
+        $userPrestamo = DB::table('users')->find($prestamo->usuarioID);
+        $docentePrestamo = DB::table('docentes')->find($prestamo->docenteID);
+        $equipoPrestamo = DB::table('equipos')->find($prestamo->equipoID);
+        return view('prestamo.edit',compact('prestamo', 'userPrestamo', 'docentePrestamo', 'equipoPrestamo', 'docentes', 'equipos'));
     }
 
     /**
@@ -106,16 +112,16 @@ class PrestamoController extends Controller
     public function update(Request $request, Prestamo $prestamo)
     {
          request()->validate([
-            'usuario' => 'required',
-            'equipo' => 'required',
-            'docente' => 'required',
+            'usuarioID' => 'required',
+            'equipoID' => 'required',
+            'docenteID' => 'required',
             'detalle' => 'required',
             'estado' => 'required'
         ]);
 
         $prestamo->update($request->all());
 
-        return redirect()->route('prestamos.index')
+        return redirect()->route('prestamo.index')
                         ->with('success','Prestamo actualizado correctamente');
     }
 
@@ -129,7 +135,7 @@ class PrestamoController extends Controller
     {
         $prestamo->delete();
 
-        return redirect()->route('prestamos.index')
+        return redirect()->route('prestamo.index')
                         ->with('success','Prestamo eliminado correctamente');
     }
 }

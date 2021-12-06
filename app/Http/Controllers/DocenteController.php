@@ -27,7 +27,7 @@ class DocenteController extends Controller
      */
     public function index()
     {
-        $docentes = DB::table('docente')->orderBy('created_at', 'DESC')->get();
+        $docentes = DB::table('docentes')->orderBy('created_at', 'DESC')->get();
         return view('docente.index',compact('docentes'));
     }
 
@@ -38,7 +38,7 @@ class DocenteController extends Controller
      */
     public function create()
     {
-        return view('docentes.create');
+        return view('docente.create');
     }
 
     /**
@@ -54,10 +54,9 @@ class DocenteController extends Controller
             'email' => 'required',
             'telefono' => 'required'
         ]);
-
         Docente::create($request->all());
 
-        return redirect()->route('docentes.index')
+        return redirect()->route('docente.index')
                         ->with('success','Docente creado correctamente.');
     }
 
@@ -69,7 +68,7 @@ class DocenteController extends Controller
      */
     public function show(Docente $docente)
     {
-        return view('docentes.show',compact('docentes'));
+        return view('docente.show',compact('docente'));
     }
 
     /**
@@ -80,7 +79,7 @@ class DocenteController extends Controller
      */
     public function edit(Docente $docente)
     {
-        return view('docentes.edit',compact('docente'));
+        return view('docente.edit',compact('docente'));
     }
 
     /**
@@ -100,7 +99,7 @@ class DocenteController extends Controller
 
         $docente->update($request->all());
 
-        return redirect()->route('docentes.index')
+        return redirect()->route('docente.index')
                         ->with('success','Docente actualizado correctamente');
     }
 
@@ -114,7 +113,7 @@ class DocenteController extends Controller
     {
         $docente->delete();
 
-        return redirect()->route('docentes.index')
+        return redirect()->route('docente.index')
                         ->with('success','Docente eliminado correctamente');
     }
 }

@@ -1,76 +1,41 @@
-#wrapper{
-    position: relative;
+#wrapper {
+    overflow-x: hidden;
+  }
+
+#sidebar-wrapper {
+min-height: 100vh;
+margin-left: -15rem;
+transition: margin 0.25s ease-out;
 }
 
-#sidebar{
-position: fixed;
-height: 100%;
-width: 0;
-z-index: 1;
+#sidebar-wrapper .sidebar-heading {
+padding: 0.875rem 1.25rem;
+font-size: 1.2rem;
 }
-#sidebar ul{
-margin-top: 60px;
-list-style: none;
-padding-left:0 ;
+
+#sidebar-wrapper .list-group {
+width: 15rem;
+}
+
+#page-content-wrapper {
+min-width: 100vw;
+}
+
+body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 margin-left: 0;
 }
-#sidebar li{
-line-height: 40px;
-text-indent: 20px;
 
+@media (min-width: 768px) {
+#sidebar-wrapper {
+    margin-left: 0;
 }
 
-#sidebar li a{
-color: #fff;
-display: block;
-text-decoration: none;
-}
-
-#sidebar li a:hover{
-background: rgb(30, 87, 68);
-}
-#sidebar li a{
-color: #fff;
-display: block;
-text-decoration: none;
-}
-
-#sidebar li a:hover{
-background: rgb(100, 151, 134)
-}
-.li-active{
-    background: #94c83d;
-    color: black;
-}
-
-#wrapper.menuDisplayed #sidebar{
-width: 240px;
-}
-#content{
-
-position: absolute;
-width: 75%;
-
-
-}
-#wrapper.menuDisplayed #content{
-padding-left: 240px;
-
-
-
-}
-.modal-btn{
-    position: absolute; top: 30px; right: 30px;
-}
-.right {
+#page-content-wrapper {
+    min-width: 0;
     width: 100%;
-    text-align: center;
+}
 
+body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+    margin-left: -15rem;
 }
-.right > li {
-    float: none;
-    display: inline-block;
-}
-.green{
-    background-color: #94c83d;
 }

@@ -27,7 +27,7 @@ class EquipoController extends Controller
      */
     public function index()
     {
-        $equipos = DB::table('equipo')->orderBy('created_at', 'DESC')->get();
+        $equipos = DB::table('equipos')->orderBy('created_at', 'DESC')->get();
         return view('equipo.index',compact('equipos'));
     }
 
@@ -38,7 +38,7 @@ class EquipoController extends Controller
      */
     public function create()
     {
-        return view('equipos.create');
+        return view('equipo.create');
     }
 
     /**
@@ -49,6 +49,7 @@ class EquipoController extends Controller
      */
     public function store(Request $request)
     {
+        echo $request;
         request()->validate([
             'nombre' => 'required',
             'tipoDispositivo' => 'required',
@@ -56,12 +57,12 @@ class EquipoController extends Controller
             'marca' => 'required',
             'color' => 'required',
             'estado' => 'required',
-            'detaller' => 'required'
+            'detalle' => 'required'
         ]);
 
         Equipo::create($request->all());
 
-        return redirect()->route('equipos.index')
+        return redirect()->route('equipo.index')
                         ->with('success','Equipo creado correctamente.');
     }
 
@@ -73,7 +74,7 @@ class EquipoController extends Controller
      */
     public function show(Equipo $equipo)
     {
-        return view('equipos.show',compact('equipo'));
+        return view('equipo.show',compact('equipo'));
     }
 
     /**
@@ -84,7 +85,7 @@ class EquipoController extends Controller
      */
     public function edit(Equipo $equipo)
     {
-        return view('equipos.edit',compact('equipo'));
+        return view('equipo.edit',compact('equipo'));
     }
 
     /**
@@ -96,19 +97,18 @@ class EquipoController extends Controller
      */
     public function update(Request $request, Equipo $equipo)
     {
-         request()->validate([
+        request()->validate([
             'nombre' => 'required',
             'tipoDispositivo' => 'required',
             'modelo' => 'required',
             'marca' => 'required',
             'color' => 'required',
             'estado' => 'required',
-            'detaller' => 'required'
+            'detalle' => 'required'
         ]);
-
         $equipo->update($request->all());
 
-        return redirect()->route('equipos.index')
+        return redirect()->route('equipo.index')
                         ->with('success','Equipo actualizado correctamente');
     }
 
@@ -121,8 +121,12 @@ class EquipoController extends Controller
     public function destroy(Equipo $equipo)
     {
         $equipo->delete();
-
-        return redirect()->route('equipos.index')
+        return redirect()->route('equipo.index')
                         ->with('success','Equipo eliminado correctamente');
     }
+    public function console_log($data){
+        echo '<script>';
+        echo 'console.log('. json_encode( $data ) .')';
+        echo '</script>';
+      }
 }

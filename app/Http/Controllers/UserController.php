@@ -32,13 +32,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::orderBy('id', 'DESC')->get();
-        $id = Auth::user()->id;
-        if(Auth::user()->hasRole('Admin')){
-            return view('users.index', compact('data'));
-        }else{
-            return redirect()->route('users.show', $id);
-        }
+        $users = User::orderBy('id', 'DESC')->get();
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -48,7 +43,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name','name')->all();
+        $roles = Role::all();
         return view('users.create',compact('roles'));
     }
 
@@ -63,7 +58,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|same:confirm-password',
+            'password' => 'required|same:confirmPassword',
             'roles' => 'required'
         ]);
 
@@ -98,9 +93,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $roles = Role::pluck('name','name')->all();
-        $userRole = $user->roles->pluck('name','name')->all();
-
+        $roles = Role::all();
+        $userRoleName = $user->roles->all();
+        $userRole = $userRoleName[0]->name;
         return view('users.edit',compact('user','roles','userRole'));
     }
 

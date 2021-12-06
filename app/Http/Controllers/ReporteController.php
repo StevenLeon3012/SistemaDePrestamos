@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Equipo;
 use App\Models\Reporte;
 use Illuminate\Http\Request;
+use PDF;
+use DB;
 
 class ReporteController extends Controller
 {
@@ -30,8 +32,12 @@ class ReporteController extends Controller
      */
     public function index()
     {
-        $docentes = Docente::orderBy('created_at', 'DESC')->get();
-        return view('reportes.index',compact('reportes'));
+        $prestamos = DB::table('prestamos')->orderBy('created_at', 'DESC')->get();
+        $usuarios = User::all();
+        $equipos = Equipo::all();
+        $docentes = Docente::all();
+        $pdf = PDF::loadView('reporte.index',compact('prestamos', 'equipos', 'docentes', 'usuarios'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->download('Reporte.pdf');
     }
 
     /**
@@ -41,9 +47,6 @@ class ReporteController extends Controller
      */
     public function create()
     {
-        $docentes = Docente::all();
-        $equipos = Equipo::all();
-        return view('reportes.create', compact('docentes', 'equipos'));
     }
 
     /**

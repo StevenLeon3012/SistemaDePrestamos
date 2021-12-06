@@ -10,9 +10,9 @@
             <div class="col-sm-6 my-4">
                 <div class="card border-0">
                     <div class="card-body d-block">
-                        <h5 class="card-title my-4">Gestionar Reportes</h5>
+                        <h5 class="card-title my-4">Gestionar Préstamos</h5>
                         <img src="/img/icons/report.svg"  style="height:100px" alt="...">
-                        <a href="/reportes.html"class="btn btn-dark   btn-lg rounded-pill "style="width:100px">Visitar</a>
+                        <a href="{{ route('prestamo.index') }}"class="btn btn-dark   btn-lg rounded-pill "style="width:100px">Visitar</a>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                     <div class="card-body d-block">
                         <h5 class="card-title my-4">Gestionar Docentes</h5>
                         <img src="/img/icons/classroom.svg"  style="height:100px" alt="...">
-                        <a href="/docentes.html"class="btn btn-dark   btn-lg rounded-pill" style="width:100px">Visitar</a>
+                        <a href="{{ route('docente.index') }}"class="btn btn-dark   btn-lg rounded-pill" style="width:100px">Visitar</a>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                     <div class="card-body d-block">
                         <h5 class="card-title my-4">Gestionar Equipos</h5>
                         <img src="/img/icons/classroom.svg"  style="height:100px" alt="...">
-                        <a href="/equipos.html"class="btn btn-dark   btn-lg rounded-pill"style="width:100px">Visitar</a>
+                        <a href="{{ route('equipo.index') }}"class="btn btn-dark   btn-lg rounded-pill"style="width:100px">Visitar</a>
                     </div>
                 </div>
             </div>
