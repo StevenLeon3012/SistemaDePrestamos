@@ -1,18 +1,18 @@
 @extends('layouts.app')
 @section('content')
-<div id="content" class="container-fluid py-4">
-    <div class="row m-4">
+<div id="content" class="container-fluid py-4" style="margin-left: 30vh">
+    <div class="row m-4" style="width:60vw;">
     <div class="col-12">
         <div class="row">
-            <div class="offset-3 col-1">
+            <div class="col-1" style="margin-right: 85vh">
                 <h5>DOCENTES</h5>
             </div>
-            <div class="offset-5 col-3">
+            <div class="col-2">
                 <a href="{{ route('docente.create') }}" type="button" class="btn modal-btn" style="background-color: #94c83d">
                     Nuevo Docente
                 </a>
             </div>
-            <div class="offset-3 col-12">
+            <div class="col-11">
                     <table class="table">
                         <thead>
                         <tr>
@@ -20,7 +20,7 @@
                             <th scope="col">Nombre Completo</th>
                             <th scope="col">Telefono</th>
                             <th scope="col">Correo</th>
-                            <th scope="col">Opciones</th>
+                            <th scope="col" style="text-align: center;">Opciones</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -30,7 +30,7 @@
                                     <td>{{ $docente->name }}</td>
                                     <td>{{ $docente->telefono }}</td>
                                     <td>{{ $docente->email }}</td>
-                                    <td>
+                                    <td style="width: 40vh; text-align: center;">
                                         <div class="d-grid gap-2 d-md-block">
                                             <a href="{{ route('docente.edit', $docente->id) }}" type="button" class="btn" style="background-color: #94c83d">
                                                 EDITAR

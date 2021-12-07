@@ -1,25 +1,25 @@
 @extends('layouts.app')
 @section('content')
-    <div id="content" class="container-fluid py-4">
-        <div class="row m-4">
+    <div id="content" class="container-fluid py-4" style="margin-left: 30vh">
+        <div class="row m-4" style="width:60vw;">
             <div class="col-12">
                 <div class="row">
-                    <div class="offset-4 col-1">
+                    <div class="col-1" style="margin-right: 85vh">
                         <h5>USUARIOS</h5>
                     </div>
-                    <div class="offset-4 col-3" style="margin-left: 200px;">
+                    <div class="col-2">
                         <a type="button" href="{{ route('users.create') }}" class="btn modal-btn" style="background-color: #94c83d">
                             Nuevo Usuario
                         </a>
                     </div>
-                    <div class="offset-4 col-11">
+                    <div class="col-11">
                         <table class="table">
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Nombre Completo</th>
                                 <th scope="col">Correo</th>
-                                <th scope="col">Opciones</th>
+                                <th scope="col" style="text-align: center;">Opciones</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -28,7 +28,7 @@
                                         <th scope="row">{{ $user->id }}</th>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>
+                                        <td style="width: 40vh; text-align: center;">
                                             <div class="d-grid gap-2 d-md-block">
                                                 <a href="{{ route('users.edit', $user->id) }}" type="button" class="btn" style="background-color: #94c83d">
                                                     EDITAR

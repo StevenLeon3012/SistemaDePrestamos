@@ -41,24 +41,22 @@
         </form>
     </div>
 </div>
-<div id="content" class="container-fluid py-4">
-    <div class="row m-4">
+<div id="content" class="container-fluid py-4" style="margin-left: 30vh">
+    <div class="row m-4" style="width:60vw;">
         <div class="col-12">
             <div class="row">
-                <div class="offset-2 col-1">
+                <div class="col-1" style="margin-right: 70vh">
                     <h5>PRÉSTAMO</h5>
                 </div>
-                <div class="offset-5 col-2">
+                <div class="col-4">
                     <button onclick="mostrarPopUp()" type="button" class="btn" style="background-color: #94c83d">
                          Generar Reporte
                     </button>
-                </div>
-                <div class="col-2">
                     <a href="{{ route('prestamo.create') }}" type="button" class="btn" style="background-color: #94c83d">
-                         Nuevo Préstamo
-                    </a>
+                        Nuevo Préstamo
+                   </a>
                 </div>
-                <div class="offset-2 col-11">
+                <div class="col-11">
                     <table class="table">
                         <thead>
                             <tr>
@@ -68,7 +66,7 @@
                                 <th scope="col">Equipo</th>
                                 <th scope="col">Fecha</th>
                                 <th scope="col">Estado</th>
-                                <th scope="col">Opciones</th>
+                                <th scope="col" style="text-align: center;">Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -96,7 +94,7 @@
                                     @else
                                         <td>Finalizado</td>
                                     @endif
-                                    <td>
+                                    <td style="width: 40vh; text-align: center;">
                                         <div class="d-grid gap-2 d-md-block">
                                             <a href="{{ route('prestamo.edit', $prestamo->id) }}" type="button" class="btn" style="background-color: #94c83d">
                                                 EDITAR
