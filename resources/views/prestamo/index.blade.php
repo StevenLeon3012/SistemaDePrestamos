@@ -2,19 +2,14 @@
 @section('content')
 <script>
 
-    function confirmarDelete()
-    {
-    var x = confirm("Estas seguro que quieres eliminar este prestamo" );
-    if (x)
-      return true;
-    else
-      return false;
-    }
-    function mostrarPopUp(){
+    function mostrarPopUp1(){
         document.getElementById("popup-1").classList.toggle("active");
     }
+    function mostrarPopUp2(){
+        document.getElementById("popup-2").classList.toggle("active");
+    }
 
-  </script>
+</script>
     @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Ups!</strong> Hay un inconveniente en los input, vuelva a intentar.<br><br>
@@ -28,7 +23,7 @@
 <div class="popup" id="popup-1">
     <div class="overlay"></div>
     <div class="contenido">
-        <div class="cerrarBtn" onclick="mostrarPopUp()">&times;</div>
+        <div class="cerrarBtn" onclick="mostrarPopUp1()">&times;</div>
         <form action="{{ route('reporte.index') }}" method="POST">
             @csrf
             <label>
@@ -49,7 +44,7 @@
                     <h5>PRÉSTAMO</h5>
                 </div>
                 <div class="col-4">
-                    <button onclick="mostrarPopUp()" type="button" class="btn" style="background-color: #94c83d">
+                    <button onclick="mostrarPopUp1()" type="button" class="btn" style="background-color: #94c83d">
                          Generar Reporte
                     </button>
                     <a href="{{ route('prestamo.create') }}" type="button" class="btn" style="background-color: #94c83d">
@@ -99,9 +94,19 @@
                                             <a href="{{ route('prestamo.edit', $prestamo->id) }}" type="button" class="btn" style="background-color: #94c83d">
                                                 EDITAR
                                             </a>
-                                            {!! Form::open(['method' => 'DELETE','route' => ['prestamo.destroy', $prestamo->id],'onsubmit' => 'confirmarDelete()','style'=>'display:inline']) !!}
-                                            {!! Form::submit('Eliminar', ['class' => 'btn btn-danger']) !!}
-                                            {!! Form::close() !!}
+                                            <button onclick="mostrarPopUp2()" type="button" class="btn btn-danger">
+                                                Eliminar
+                                           </button>
+                                           <div class="popup" id="popup-2">
+                                                <div class="overlay"></div>
+                                                <div class="contenido">
+                                                    <h3 style="margin-bottom: 3vh">¿Deseas eliminar el prestamo número {{ $prestamo->id }}?</h3>
+                                                    {!! Form::open(['method' => 'DELETE','route' => ['prestamo.destroy', $prestamo->id],'style'=>'display:inline']) !!}
+                                                    {!! Form::submit('Eliminar', ['class' => 'btn btn-danger']) !!}
+                                                    {!! Form::close() !!}
+                                                    <a type="button" style="background-color: #94c83d" class="btn" onclick="mostrarPopUp2()">Cancelar</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>

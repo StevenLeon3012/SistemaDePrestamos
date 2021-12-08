@@ -3,8 +3,6 @@
 <div class="pull-right">
     <a class="btn btn-primary" style="margin-bottom: 10px; margin-left: 30vh;" href="{{ route('equipo.index') }}">Atrás</a>
 </div>
-</div>
-</div>
 @if ($errors->any())
     <div class="alert alert-danger">
         <strong>Ups!</strong> Hay un inconveniente en los input, vuelva a intentar.<br><br>

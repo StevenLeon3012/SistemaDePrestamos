@@ -1,17 +1,5 @@
 @extends('layouts.app')
 @section('content')
-<script>
-
-    function confirmar()
-    {
-    var x = confirm("Estas seguro que quieres editar este prestamo" );
-    if (x)
-      return true;
-    else
-      return false;
-    }
-
-  </script>
 <div class="pull-right">
     <a class="btn btn-primary" style="margin-bottom: 10px; margin-left: 30vh;" href="{{ route('prestamo.index') }}">Atrás</a>
 </div>
@@ -138,7 +126,7 @@
                 <textarea class="form-control"  name="detalle" id="" cols="10" rows="4">{{ $prestamo->detalle }}</textarea>
             </div>
             <div class="d-flex flex-row-reverse">
-                <button type="submit" class="btn" onclick="confirmar();" style="background-color: #94c83d;">Guardar</button>
+                <button type="submit" class="btn" style="background-color: #94c83d;">Guardar</button>
             </div>
         </div>
       </div>

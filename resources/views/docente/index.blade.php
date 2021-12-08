@@ -1,5 +1,12 @@
 @extends('layouts.app')
 @section('content')
+<script>
+
+    function mostrarPopUp(){
+        document.getElementById("popup-1").classList.toggle("active");
+    }
+
+</script>
 <div id="content" class="container-fluid py-4" style="margin-left: 30vh">
     <div class="row m-4" style="width:60vw;">
     <div class="col-12">
@@ -35,9 +42,19 @@
                                             <a href="{{ route('docente.edit', $docente->id) }}" type="button" class="btn" style="background-color: #94c83d">
                                                 EDITAR
                                             </a>
-                                            {!! Form::open(['method' => 'DELETE','route' => ['docente.destroy', $docente->id],'style'=>'display:inline']) !!}
-                                            {!! Form::submit('Eliminar', ['class' => 'btn btn-danger']) !!}
-                                            {!! Form::close() !!}
+                                            <button onclick="mostrarPopUp()" type="button" class="btn btn-danger">
+                                                Eliminar
+                                            </button>
+                                            <div class="popup" id="popup-1">
+                                                <div class="overlay"></div>
+                                                <div class="contenido">
+                                                    <h3 style="margin-bottom: 3vh">¿Deseas eliminar el docente número {{ $docente->id }}?</h3>
+                                                    {!! Form::open(['method' => 'DELETE','route' => ['docente.destroy', $docente->id],'style'=>'display:inline']) !!}
+                                                    {!! Form::submit('Eliminar', ['class' => 'btn btn-danger']) !!}
+                                                    {!! Form::close() !!}
+                                                    <a type="button" style="background-color: #94c83d" class="btn" onclick="mostrarPopUp()">Cancelar</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
