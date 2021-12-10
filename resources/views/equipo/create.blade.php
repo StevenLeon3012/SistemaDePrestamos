@@ -5,10 +5,29 @@
 </div>
 @if ($errors->any())
     <div class="alert alert-danger">
-        <strong>Ups!</strong> Hay un inconveniente en los input, vuelva a intentar.<br><br>
+        <strong>Ups!</strong> Hay un inconveniente en los espacios, vuelva a intentar.<br><br>
         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                @switch($error)
+                    @case("The nombre field is required.")
+                        <li>El nombre es un espacio necesario</li>
+                        @break
+                    @case("The tipo dispositivo field is required.")
+                        <li>El tipo de dispositivo es un espacio necesario</li>
+                        @break
+                    @case("The modelo field is required.")
+                        <li>El modelo es un espacio necesario</li>
+                        @break
+                    @case("The marca field is required.")
+                        <li>La marca es un espacio necesario</li>
+                        @break
+                    @case("The color field is required.")
+                        <li>El color es un espacio necesario</li>
+                        @break
+                    @case("The detalle field is required.")
+                        <li>El detalle es un espacio necesario</li>
+                        @break
+                @endswitch
             @endforeach
         </ul>
     </div>

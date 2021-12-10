@@ -26,7 +26,7 @@
         <div id="app">
             <nav style="height:10vh" class="navbar navbar-expand-lg navbar-dark bg-dark top-fixed">
                 <div class="container-fluid">
-                    <img src="/img/logo.png"  height="60" alt="">
+                    <img src="/img/logoblanco.png"  height="60" alt="">
                     <div class="d-flex flex-row-reverse collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="right navbar-nav ml-auto">
                             <!-- Authentication Links -->

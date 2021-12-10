@@ -6,10 +6,23 @@
 </div>
 @if ($errors->any())
     <div class="alert alert-danger">
-        <strong>Ups!</strong> Hay un inconveniente en los input, vuelva a intentar.<br><br>
+        <strong>Ups!</strong> Hay un inconveniente en los espacios, vuelva a intentar.<br><br>
         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                @switch($error)
+                    @case("The name field is required.")
+                        <li>El nombre es un espacio necesario</li>
+                        @break
+                    @case("The email field is required.")
+                        <li>El correo es un espacio necesario</li>
+                        @break
+                    @case("The password field is required.")
+                        <li>La contraseña es un espacio necesario</li>
+                        @break
+                    @case("The roles field is required.")
+                        <li>El rol es un espacio necesario</li>
+                        @break
+                @endswitch
             @endforeach
         </ul>
     </div>

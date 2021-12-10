@@ -8,7 +8,14 @@
             <strong>Ups!</strong> Hay un inconveniente en los input, vuelva a intentar.<br><br>
             <ul>
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                    @switch($error)
+                        @case("The name field is required.")
+                            <li>El nombre es un espacio necesario</li>
+                            @break
+                        @case("The email field is required.")
+                            <li>El correo es un espacio necesario</li>
+                            @break
+                    @endswitch
                 @endforeach
             </ul>
         </div>

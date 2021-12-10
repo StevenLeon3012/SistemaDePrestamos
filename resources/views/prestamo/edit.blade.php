@@ -8,7 +8,17 @@
         <strong>Ups!</strong> Hay un inconveniente en los input, vuelva a intentar.<br><br>
         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                @switch($error)
+                    @case("The equipo i d field is required.")
+                        <li>El equipo es un espacio necesario</li>
+                        @break
+                    @case("The docente i d field is required.")
+                        <li>El docente es un espacio necesario</li>
+                        @break
+                    @case("The detalle field is required.")
+                        <li>El detalle es un espacio necesario</li>
+                        @break
+                @endswitch
             @endforeach
         </ul>
     </div>
