@@ -14,7 +14,7 @@ class Equipo extends Model {
      * @var array
      */
     protected $fillable = [
-        'nombre' ,'tipoDispositivo', 'modelo','marca' , 'color', 'estado', 'detalle'
+        'nombre' ,'tipoDispositivo', 'modelo','marca' , 'color', 'estado', 'detalle', 'disponibilidad'
     ];
 
     //Relacion uno a muchos

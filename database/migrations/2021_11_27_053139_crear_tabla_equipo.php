@@ -22,6 +22,7 @@ class CrearTablaEquipo extends Migration
             $table->string('color');
             $table->boolean('estado');
             $table->longText('detalle');
+            $table->boolean('disponibilidad');
             $table->timestamps();
         });
     }

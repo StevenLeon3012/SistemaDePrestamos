@@ -22,6 +22,7 @@
                     <div class="mb-3">
                         <label class="form-label">Nombre Completo</label>
                         <input type="text" name="name" class="form-control" value="{{ $user->name }}">
+                        <input type="hidden" name="disponibilidad" value="{{ $user->disponibilidad }}">
                     </div>
                     @foreach ($roles as $rol)
                         <div class="mb-3">

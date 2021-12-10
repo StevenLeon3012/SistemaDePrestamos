@@ -52,7 +52,8 @@ class DocenteController extends Controller
         request()->validate([
             'name' => 'required',
             'email' => 'required',
-            'telefono' => 'required'
+            'telefono' => 'required',
+            'disponibilidad' => 'required'
         ]);
         Docente::create($request->all());
 
@@ -94,7 +95,8 @@ class DocenteController extends Controller
          request()->validate([
             'name' => 'required',
             'email' => 'required',
-            'telefono' => 'required'
+            'telefono' => 'required',
+            'disponibilidad' => 'required'
         ]);
 
         $docente->update($request->all());

@@ -32,32 +32,40 @@
                         </thead>
                         <tbody>
                             @foreach ($docentes as $docente)
-                                <tr>
-                                    <th scope="row">{{ $docente->id }}</th>
-                                    <td>{{ $docente->name }}</td>
-                                    <td>{{ $docente->telefono }}</td>
-                                    <td>{{ $docente->email }}</td>
-                                    <td style="width: 40vh; text-align: center;">
-                                        <div class="d-grid gap-2 d-md-block">
-                                            <a href="{{ route('docente.edit', $docente->id) }}" type="button" class="btn" style="background-color: #94c83d">
-                                                EDITAR
-                                            </a>
-                                            <button onclick="mostrarPopUp()" type="button" class="btn btn-danger">
-                                                Eliminar
-                                            </button>
-                                            <div class="popup" id="popup-1">
-                                                <div class="overlay"></div>
-                                                <div class="contenido">
-                                                    <h3 style="margin-bottom: 3vh">¿Deseas eliminar el docente número {{ $docente->id }}?</h3>
-                                                    {!! Form::open(['method' => 'DELETE','route' => ['docente.destroy', $docente->id],'style'=>'display:inline']) !!}
-                                                    {!! Form::submit('Eliminar', ['class' => 'btn btn-danger']) !!}
-                                                    {!! Form::close() !!}
-                                                    <a type="button" style="background-color: #94c83d" class="btn" onclick="mostrarPopUp()">Cancelar</a>
+                                @if($docente->disponibilidad)
+                                    <tr>
+                                        <th scope="row">{{ $docente->id }}</th>
+                                        <td>{{ $docente->name }}</td>
+                                        <td>{{ $docente->telefono }}</td>
+                                        <td>{{ $docente->email }}</td>
+                                        <td style="width: 40vh; text-align: center;">
+                                            <div class="d-grid gap-2 d-md-block">
+                                                <a href="{{ route('docente.edit', $docente->id) }}" type="button" class="btn" style="background-color: #94c83d">
+                                                    EDITAR
+                                                </a>
+                                                <button onclick="mostrarPopUp()" type="button" class="btn btn-danger">
+                                                    Eliminar
+                                                </button>
+                                                <div class="popup" id="popup-1">
+                                                    <div class="overlay"></div>
+                                                    <div class="contenido">
+                                                        <h3 style="margin-bottom: 3vh">¿Deseas eliminar el docente número {{ $docente->id }}?</h3>
+                                                        <form action="{{ route('docente.update', $docente->id) }}" method="POST" style="display:inline">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <input type="hidden" name="name" value="{{ $docente->name }}">
+                                                            <input type="hidden" name="disponibilidad" value="0">
+                                                            <input type="hidden" name="email" value="{{ $docente->email }}">
+                                                            <input type="hidden" name="telefono" value="{{ $docente->telefono }}">
+                                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                        </form>
+                                                        <a type="button" style="background-color: #94c83d" class="btn" onclick="mostrarPopUp()">Cancelar</a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

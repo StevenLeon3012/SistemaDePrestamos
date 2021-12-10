@@ -18,6 +18,7 @@ class CrearTablaDocente extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('telefono');
+            $table->boolean('disponibilidad');
             $table->timestamps();
         });
     }

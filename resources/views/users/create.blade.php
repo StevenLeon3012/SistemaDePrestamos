@@ -35,6 +35,7 @@
                     <div class="mb-3">
                         <label class="form-label">Nombre Completo</label>
                         <input type="text" name="name" class="form-control" placeholder="Nombre del usuario">
+                        <input type="hidden" name="disponibilidad" value="1">
                     </div>
                     <label class="form-check-label" for="flexRadioDefault1">
                         Rol

@@ -59,7 +59,8 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirmPassword',
-            'roles' => 'required'
+            'roles' => 'required',
+            'disponibilidad' => 'required'
         ]);
 
         $input = $request->all();
@@ -108,38 +109,52 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id,
-            'password' => 'same:confirm-password',
-            'roles' => 'required'
-        ]);
+        if($request['disponibilidad']){
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email,'.$id,
+                'password' => 'same:confirm-password',
+                'roles' => 'required',
+                'disponibilidad' => 'required'
+            ]);
 
-        $input = $request->all();
-        if(!empty($input['password'])){
-            $input['password'] = Hash::make($input['password']);
-        }else{
-            $input = Arr::except($input,array('password'));
-        }
-
-        $user = User::find($id);
-        $user->update($input);
-        if(isset($input['roles'])) {
-            //Se elimina el rol de usuario
-            DB::table('model_has_roles')->where('model_id', $id)->delete();
-            //Se asigna el rol
-            $user->assignRole($request->input('roles'));
-            }
-            if(Auth::user()->hasRole('Admin')) {
-                return redirect()->route('users.index')
-                                ->with('success', 'Usuario actualizado correctamente');
+            $input = $request->all();
+            if(!empty($input['password'])){
+                $input['password'] = Hash::make($input['password']);
             }else{
-                return redirect()->route('users.show', $id)
-                                ->with('success', 'Usuario actualizado correctamente');
+                $input = Arr::except($input,array('password'));
             }
 
-        return redirect()->route('users.index')
-                        ->with('success','User updated successfully');
+            $user = User::find($id);
+            $user->update($input);
+            if(isset($input['roles'])) {
+                //Se elimina el rol de usuario
+                DB::table('model_has_roles')->where('model_id', $id)->delete();
+                //Se asigna el rol
+                $user->assignRole($request->input('roles'));
+                }
+                if(Auth::user()->hasRole('Admin')) {
+                    return redirect()->route('users.index')
+                                    ->with('success', 'Usuario actualizado correctamente');
+                }else{
+                    return redirect()->route('users.show', $id)
+                                    ->with('success', 'Usuario actualizado correctamente');
+                }
+
+            return redirect()->route('users.index')
+                            ->with('success','User updated successfully');
+        }else{
+            $input = $request->all();
+            if(!empty($input['password'])){
+                $input['password'] = Hash::make($input['password']);
+            }else{
+                $input = Arr::except($input,array('password'));
+            }
+
+            $user = User::find($id);
+            $user->update($input);
+            return redirect()->route('users.index');
+        }
     }
 
     /**
@@ -150,8 +165,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        /*
         User::find($id)->delete();
         return redirect()->route('users.index')
                         ->with('success','User deleted successfully');
+        */
     }
 }

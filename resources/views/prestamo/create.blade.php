@@ -46,14 +46,16 @@
                         </thead>
                         <tbody>
                             @foreach ($docentes as $docente)
-                                <tr>
-                                    <td>
-                                        <input class="form-check-input" value="{{ $docente->id }}" type="radio" name="docenteID">
-                                    </td>
-                                    <td>
-                                        {{ $docente->name }}
-                                    </td>
-                                </tr>
+                                @if($docente->disponibilidad)
+                                    <tr>
+                                        <td>
+                                            <input class="form-check-input" value="{{ $docente->id }}" type="radio" name="docenteID">
+                                        </td>
+                                        <td>
+                                            {{ $docente->name }}
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>
@@ -81,15 +83,17 @@
                         </thead>
                         <tbody>
                             @foreach ($equipos as $equipo)
-                                @if ($equipo->estado == 1)
-                                    <tr>
-                                        <td>
-                                            <input class="form-check-input" value="{{ $equipo->id }}" type="radio" name="equipoID">
-                                        </td>
-                                        <td>
-                                            {{ $equipo->nombre }}
-                                        </td>
-                                    </tr>
+                                @if($equipo->disponibilidad)
+                                    @if ($equipo->estado == 1)
+                                        <tr>
+                                            <td>
+                                                <input class="form-check-input" value="{{ $equipo->id }}" type="radio" name="equipoID">
+                                            </td>
+                                            <td>
+                                                {{ $equipo->nombre }}
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endif
                             @endforeach
                         </tbody>

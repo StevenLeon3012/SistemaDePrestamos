@@ -57,7 +57,8 @@ class EquipoController extends Controller
             'marca' => 'required',
             'color' => 'required',
             'estado' => 'required',
-            'detalle' => 'required'
+            'detalle' => 'required',
+            'disponibilidad' => 'required'
         ]);
 
         Equipo::create($request->all());
@@ -104,7 +105,8 @@ class EquipoController extends Controller
             'marca' => 'required',
             'color' => 'required',
             'estado' => 'required',
-            'detalle' => 'required'
+            'detalle' => 'required',
+            'disponibilidad' => 'required'
         ]);
         $equipo->update($request->all());
 

@@ -40,6 +40,7 @@
                 <div class="form-group mb-3">
                     <label class="form-label">Nombre Equipo</label>
                     <input type="text" class="form-control" name="nombre" placeholder="Nombre del equipo">
+                    <input type="hidden" value="1" name="disponibilidad">
                 </div>
                 <div class="form-group mb-3">
                     <label class="form-label">Tipo De Dispositivo</label>

@@ -31,31 +31,38 @@
                             </thead>
                             <tbody>
                                 @foreach ($users as $user)
-                                    <tr>
-                                        <th scope="row">{{ $user->id }}</th>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td style="width: 40vh; text-align: center;">
-                                            <div class="d-grid gap-2 d-md-block">
-                                                <a href="{{ route('users.edit', $user->id) }}" type="button" class="btn" style="background-color: #94c83d">
-                                                    EDITAR
-                                                </a>
-                                                <button onclick="mostrarPopUp()" type="button" class="btn btn-danger">
-                                                    Eliminar
-                                                </button>
-                                                <div class="popup" id="popup-1">
-                                                    <div class="overlay"></div>
-                                                    <div class="contenido">
-                                                        <h3 style="margin-bottom: 3vh">¿Deseas eliminar el usuario número {{ $user->id }}?</h3>
-                                                        {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-                                                        {!! Form::submit('Eliminar', ['class' => 'btn btn-danger']) !!}
-                                                        {!! Form::close() !!}
-                                                        <a type="button" style="background-color: #94c83d" class="btn" onclick="mostrarPopUp()">Cancelar</a>
+                                    @if($user->disponibilidad)
+                                        <tr>
+                                            <th scope="row">{{ $user->id }}</th>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td style="width: 40vh; text-align: center;">
+                                                <div class="d-grid gap-2 d-md-block">
+                                                    <a href="{{ route('users.edit', $user->id) }}" type="button" class="btn" style="background-color: #94c83d">
+                                                        EDITAR
+                                                    </a>
+                                                    <button onclick="mostrarPopUp()" type="button" class="btn btn-danger">
+                                                        Eliminar
+                                                    </button>
+                                                    <div class="popup" id="popup-1">
+                                                        <div class="overlay"></div>
+                                                        <div class="contenido">
+                                                            <h3 style="margin-bottom: 3vh">¿Deseas eliminar el usuario número {{ $user->id }}?</h3>
+                                                            <form action="{{ route('users.update', $user->id) }}" style="display: inline;" method="POST">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <input type="hidden" name="name" class="form-control" value="{{ $user->name }}">
+                                                                <input type="hidden" name="disponibilidad" value="0">
+                                                                <input type="hidden" name="email" class="form-control" value="{{ $user->email }}">
+                                                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                            </form>
+                                                            <a type="button" style="background-color: #94c83d" class="btn" onclick="mostrarPopUp()">Cancelar</a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>

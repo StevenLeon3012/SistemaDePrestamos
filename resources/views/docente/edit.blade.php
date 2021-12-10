@@ -28,6 +28,7 @@
                 <div class="mb-3">
                     <label class="form-label">Nombre Completo</label>
                     <input type="text" name="name" class="form-control" value="{{ $docente->name }}">
+                    <input type="hidden" name="disponibilidad" value="1">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Correo</label>

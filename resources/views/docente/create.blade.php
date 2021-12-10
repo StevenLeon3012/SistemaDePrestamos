@@ -27,6 +27,7 @@
                 <div class="mb-3">
                     <label class="form-label">Nombre Completo</label>
                     <input type="text" name="name" class="form-control" placeholder="Nombre del Docente">
+                    <input type="hidden" name="disponibilidad" value="1">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Correo</label>
